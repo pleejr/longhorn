@@ -5147,7 +5147,7 @@ spec:
           - name: CSI_ATTACHER_IMAGE
             value: "longhornio/csi-attacher:v4.8.0"
           - name: CSI_PROVISIONER_IMAGE
-            value: "longhornio/csi-provisioner:v5.1.0-20241220"
+            value: "longhornio/csi-provisioner:v5.1.0"
           - name: CSI_NODE_DRIVER_REGISTRAR_IMAGE
             value: "longhornio/csi-node-driver-registrar:v2.13.0"
           - name: CSI_RESIZER_IMAGE
@@ -5189,8 +5189,7 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
+          - podAffinityTerm:
               labelSelector:
                 matchExpressions:
                 - key: app
@@ -5198,6 +5197,7 @@ spec:
                   values:
                   - longhorn-ui
               topologyKey: kubernetes.io/hostname
+            weight: 1
       containers:
       - name: longhorn-ui
         image: longhornio/longhorn-ui:master-head
